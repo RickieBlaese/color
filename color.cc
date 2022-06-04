@@ -1,4 +1,5 @@
 #include "color.h"
+#include <algorithm>
 
 
 namespace ssto {
@@ -25,12 +26,12 @@ namespace ssto {
 		
 		void generate_rainbow(unsigned int length, std::vector<color24b_t>& outvec) {
 			unsigned int starting_vector_length = outvec.size();
-			gradient(red24b, orange24b, length / 7.0f, outvec);
-			gradient(orange24b, yellow24b, length / 7.0f, outvec);
-			gradient(yellow24b, green24b, length / 7.0f, outvec);
-			gradient(green24b, blue24b, length / 6.0f, outvec); // more weight to blue
-			gradient(blue24b, indigo24b, length / 8.0f, outvec); // less weight to indigo
-			gradient(indigo24b, violet24b, length / 7.0f, outvec);
+			gradient(red24b, orange24b, length / 6.0f, outvec);
+			gradient(orange24b, yellow24b, length / 6.0f, outvec);
+			gradient(yellow24b, green24b, length / 6.0f, outvec);
+			gradient(green24b, blue24b, length / 6.0f, outvec);
+			gradient(blue24b, indigo24b, length / 6.0f, outvec);
+			gradient(indigo24b, violet24b, length / 6.0f, outvec);
 			gradient(violet24b, red24b, length - (outvec.size() - starting_vector_length), outvec); // fill the rest with violet back to red
 		}
 

@@ -48,7 +48,7 @@ namespace ssto {
 		void gradient(color24b_t color1, color24b_t color2, unsigned int count, std::vector<color24b_t>& outvec);
 		
 		// generates a ROYGBIV rainbow across specified length
-		void generate_rainbow(unsigned int length, std::vector<ssto::color::color24b_t>& outvec);
+		void generate_rainbow(unsigned int length, std::vector<color24b_t>& outvec);
 
 	} // namespace color
 
