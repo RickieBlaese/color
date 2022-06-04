@@ -16,30 +16,29 @@ unsigned short randrgb() {
 
 
 int main() {
-	std::ios_base::sync_with_stdio(false);
 	std::string text;
 	double outs;
 	std::cout << "text: ";
 	std::getline(std::cin, text);
 	outs = text.size();
-	std::vector<char> vbacks = std::vector<char>(outs, '\b');
-	std::string backs = std::string(vbacks.data());
+	std::string backs = std::string(std::vector<char>(outs, '\b').data());
 
 	std::vector<ssto::color::color24b_t> rainbow;
 	ssto::color::generate_rainbow(outs, rainbow);
 
 	// buffered for cleaner output
-	std::stringstream buf;
+	std::ostringstream buf;
+	std::string empty;
 	while (true) {
-		buf.clear();
+		buf.str(empty);
 		buf << backs;
 		std::rotate(rainbow.begin(), rainbow.end() - 1, rainbow.end()); // shift for effect
 		for (int i = 0; i < outs; i++) {
 			buf << ssto::color::out(rainbow[i], true) << text[i];
 		}
-		std::cout << buf.rdbuf();
-		usleep(20000.0f);
+		std::cout << buf.str();
+		usleep(10'000.0f);
 	}
-	std::cout << ssto::color::reset << '\n';
+	std::cout << ssto::color::reset << std::endl;
 	return 0;
 }
