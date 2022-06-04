@@ -1,6 +1,7 @@
 #include "color.h"
 
 #include <iostream>
+#include <ostream>
 #include <random>
 #include <sstream>
 #include <string>
@@ -27,16 +28,13 @@ int main() {
 	ssto::color::generate_rainbow(outs, rainbow);
 
 	// buffered for cleaner output
-	std::ostringstream buf;
-	std::string empty;
 	while (true) {
-		buf.str(empty);
-		buf << backs;
 		std::rotate(rainbow.begin(), rainbow.end() - 1, rainbow.end()); // shift for effect
+		std::cout << backs;
 		for (int i = 0; i < outs; i++) {
-			buf << ssto::color::out(rainbow[i], true) << text[i];
+			std::cout << ssto::color::out(rainbow[i], true) << text[i];
 		}
-		std::cout << buf.str();
+		std::flush(std::cout);
 		usleep(10'000.0f);
 	}
 	std::cout << ssto::color::reset << std::endl;
